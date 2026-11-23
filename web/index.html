@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Religion im Alltag – kostenlose Analyse-App für Android. Entdecke religiöse Spuren in Musik, Film und Alltag.">
+<title>Religion im Alltag – Analyse-App für Android</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+:root{
+  --primary:#65558F; --on-primary:#fff;
+  --container:#E8DEF8; --container-hi:#D9CCF0; --on-container:#1D192B;
+  --bg:#F7F6FA; --surface:#fff; --nav:#F1EAF3;
+  --text:#1B1B1F; --muted:#6B6875; --outline:#CAC4D8;
+  --ok:#E1EDD6; --ok-text:#3F5B2A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Roboto,"Segoe UI",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* Top bar */
+.top{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:700;font-size:1.1rem}
+.brand i{width:44px;height:44px;border-radius:14px;background:var(--primary);color:#fff;display:grid;place-items:center;font-style:normal;font-size:22px}
+.top nav{display:flex;gap:6px}
+.top nav a{padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:500;font-size:.95rem;color:var(--muted)}
+.top nav a:hover{background:var(--container);color:var(--on-container)}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:48px 0 72px}
+.hero h1{font-size:clamp(2.3rem,5vw,3.6rem);line-height:1.08;font-weight:800;letter-spacing:-.02em}
+.hero p.lead{margin:20px 0 32px;font-size:1.2rem;color:var(--muted);max-width:30em}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:600;font-size:1.05rem;text-decoration:none;transition:box-shadow .2s,background .2s}
+.btn.fill{background:var(--primary);color:#fff}
+.btn.fill:hover{box-shadow:0 6px 18px rgba(101,85,143,.4)}
+.btn.tonal{background:var(--container);color:var(--on-container)}
+.btn.tonal:hover{background:var(--container-hi)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.chip{background:var(--container);color:var(--on-container);padding:8px 16px;border-radius:999px;font-size:.9rem;font-weight:500}
+
+/* Phone */
+.phone-wrap{display:flex;justify-content:center}
+.phone{width:290px;background:var(--bg);border-radius:36px;border:8px solid #1d1b22;box-shadow:0 24px 60px rgba(60,40,110,.28);overflow:hidden;font-size:13px;display:flex;flex-direction:column;height:560px}
+.ph-status{display:flex;justify-content:space-between;padding:12px 18px 4px;font-weight:600;font-size:12px}
+.ph-head{display:flex;gap:10px;align-items:center;padding:12px 16px}
+.ph-head i{width:38px;height:38px;border-radius:12px;background:var(--primary);color:#fff;display:grid;place-items:center;font-style:normal}
+.ph-head b{display:block;font-size:15px}
+.ph-head span{color:var(--muted);font-size:11px}
+.ph-body{padding:10px 16px;flex:1}
+.ph-body h3{font-size:22px;line-height:1.2;margin-bottom:6px}
+.ph-body p{color:var(--muted);margin-bottom:16px}
+.ph-chips{display:flex;flex-wrap:wrap;gap:8px}
+.ph-chips span{background:var(--container);color:var(--on-container);padding:9px 13px;border-radius:999px;font-weight:500}
+.ph-input{display:flex;gap:8px;padding:10px 12px;background:#fff;align-items:center}
+.ph-input div{flex:1;background:#F0EFF4;border-radius:999px;padding:11px 14px;color:var(--muted)}
+.ph-input i{width:38px;height:38px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center;font-style:normal;font-size:18px}
+.ph-nav{display:flex;justify-content:space-around;background:var(--nav);padding:10px 4px 12px;font-size:11px;color:var(--muted)}
+.ph-nav div{text-align:center}
+.ph-nav i{display:block;font-style:normal;font-size:16px;padding:3px 16px;border-radius:999px;margin-bottom:2px}
+.ph-nav .on{color:var(--text);font-weight:600}
+.ph-nav .on i{background:var(--container)}
+
+/* Sections */
+section{padding:56px 0}
+h2{font-size:clamp(1.7rem,3.2vw,2.2rem);font-weight:800;letter-spacing:-.01em;margin-bottom:10px}
+.sub{color:var(--muted);font-size:1.05rem;max-width:36em;margin-bottom:32px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.card{background:var(--surface);border-radius:28px;padding:28px}
+.card .ico{width:52px;height:52px;border-radius:16px;background:var(--container);display:grid;place-items:center;font-size:24px;margin-bottom:18px}
+.card h3{font-size:1.15rem;margin-bottom:6px}
+.card p{color:var(--muted);font-size:.97rem}
+.badge{display:inline-block;background:var(--ok);color:var(--ok-text);font-weight:600;font-size:.8rem;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+
+/* Download panel */
+.panel{background:var(--container);border-radius:36px;padding:48px;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.panel h2{color:var(--on-container)}
+.panel p{color:#4A4458}
+.steps{list-style:none;display:grid;gap:12px}
+.steps li{background:#fff;border-radius:20px;padding:16px 20px;display:flex;gap:16px;align-items:center;font-size:.97rem}
+.steps b{flex:none;width:34px;height:34px;border-radius:50%;background:var(--primary);color:#fff;display:grid;place-items:center}
+
+/* Wissen */
+.k-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.k{display:block;background:var(--surface);border-radius:24px;padding:22px;text-decoration:none;border:1.5px solid transparent;transition:border-color .2s,background .2s}
+.k:hover{border-color:var(--outline);background:#FBFAFE}
+.k .ico{width:44px;height:44px;border-radius:14px;background:var(--container);display:grid;place-items:center;font-size:20px;margin-bottom:14px}
+.k h3{font-size:1.05rem;margin-bottom:4px}
+.k p{color:var(--muted);font-size:.93rem}
+.more{margin-top:28px}
+
+footer{margin-top:40px;background:var(--nav);padding:36px 0;color:var(--muted);font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+@media(max-width:860px){
+  .hero,.panel{grid-template-columns:1fr}
+  .panel{padding:32px 24px;border-radius:28px}
+  .top nav{display:none}
+  .hero{padding-top:24px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ===== Animationen ===== */
+@keyframes up{from{opacity:0;translate:0 28px}to{opacity:1;translate:0 0}}
+@keyframes down{from{opacity:0;translate:0 -20px}to{opacity:1;translate:0 0}}
+@keyframes pop{from{opacity:0;scale:.82;translate:0 24px}to{opacity:1;scale:1;translate:0 0}}
+@keyframes float{50%{transform:translateY(-14px) rotate(-.7deg)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(101,85,143,.55)}70%,100%{box-shadow:0 0 0 14px rgba(101,85,143,0)}}
+@keyframes drift{to{transform:translate(5%,4%) scale(1.12) rotate(8deg)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes nudge{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(5px)}}
+@keyframes rip{to{scale:2.6;opacity:0}}
+@keyframes wob{0%,100%{rotate:0deg}25%{rotate:-10deg}75%{rotate:10deg}}
+
+body::before{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none;
+  background:radial-gradient(38% 38% at 18% 18%,rgba(208,188,255,.6),transparent 70%),radial-gradient(34% 34% at 82% 28%,rgba(232,222,248,.95),transparent 70%),radial-gradient(40% 40% at 60% 85%,rgba(214,198,246,.55),transparent 70%);
+  animation:drift 22s ease-in-out infinite alternate}
+.prog{position:fixed;top:0;left:0;right:0;height:4px;background:var(--primary);transform-origin:0 50%;transform:scaleX(0);z-index:50}
+
+.top{animation:down .6s both}
+.hero h1{animation:up .8s .1s both}
+.hero p.lead{animation:up .8s .25s both}
+.hero .btns{animation:up .8s .4s both}
+.hero .chips{animation:up .8s .55s both}
+.chip{transition:transform .2s,background .2s}
+.chip:hover{transform:translateY(-3px);background:var(--container-hi)}
+.phone-wrap{animation:pop 1s .3s both}
+.phone{animation:float 6s ease-in-out 1.3s infinite}
+.ph-chips span{animation:pop .5s both}
+.ph-chips span:nth-child(1){animation-delay:1s}.ph-chips span:nth-child(2){animation-delay:1.15s}.ph-chips span:nth-child(3){animation-delay:1.3s}
+.ph-input i{animation:pulse 2.4s infinite}
+.ph-input div::after{content:"|";color:var(--primary);margin-left:1px;animation:blink 1s steps(1) infinite}
+.dl{display:inline-block;animation:nudge 1.8s ease-in-out infinite}
+.brand:hover i{animation:wob .6s}
+
+.js .rv{opacity:0}
+.rv.in{animation:up .75s var(--d,0ms) cubic-bezier(.2,.7,.2,1) both}
+
+.btn{position:relative;overflow:hidden;transition:box-shadow .2s,background .2s,transform .15s}
+.btn:active{transform:scale(.96)}
+.rip{position:absolute;border-radius:50%;background:rgba(255,255,255,.45);scale:0;animation:rip .65s ease-out forwards;pointer-events:none}
+.btn.tonal .rip{background:rgba(101,85,143,.25)}
+
+.card,.k,.steps li{transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,background .2s,border-color .2s}
+.card:hover{transform:translateY(-8px);box-shadow:0 16px 34px rgba(101,85,143,.18)}
+.card .ico,.k .ico{transition:transform .35s cubic-bezier(.3,1.6,.5,1),background .2s}
+.card:hover .ico{transform:rotate(-8deg) scale(1.15);background:var(--container-hi)}
+.k:hover{transform:translateY(-5px);box-shadow:0 12px 26px rgba(101,85,143,.14)}
+.k:hover .ico{transform:rotate(-8deg) scale(1.15);background:var(--container-hi)}
+.steps li:hover{transform:translateX(8px)}
+.steps b{transition:transform .3s cubic-bezier(.3,1.6,.5,1)}
+.steps li:hover b{transform:scale(1.2) rotate(8deg)}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}.js .rv{opacity:1}}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#"><i>?</i>Religion im Alltag</a>
+    <nav>
+      <a href="#features">App</a>
+      <a href="#download">Download</a>
+      <a href="#wissen">Wissen</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <h1>Woran erkennst du religiöse Spuren?</h1>
+        <p class="lead">Gib einen Song, einen Film oder einen Alltagseindruck ein. Die App zeigt dir, welche religiösen und profanen Bezüge darin stecken.</p>
+        <div class="btns">
+          <a class="btn fill" href="app-release.apk"><span class="dl">⬇</span> APK herunterladen</a>
+          <a class="btn tonal" href="wissen.html">Wissen entdecken</a>
+        </div>
+        <div class="chips">
+          <span class="chip">Kostenlos</span>
+          <span class="chip">Android</span>
+          <span class="chip">21 Kategorien</span>
+        </div>
+      </div>
+
+      <div class="phone-wrap" aria-hidden="true">
+        <div class="phone">
+          <div class="ph-status"><span>20:37</span><span>81 %</span></div>
+          <div class="ph-head"><i>?</i><div><b>Religion im Alltag</b><span>Woran erkennst du religiöse Spuren?</span></div></div>
+          <div class="ph-body">
+            <h3>Was möchtest du untersuchen?</h3>
+            <p>Gib einen Song, einen Film oder einen Alltagseindruck ein.</p>
+            <div class="ph-chips"><span>♪ Like a Prayer</span><span>🎬 Back to the 90s</span><span>🎉 Festival</span></div>
+          </div>
+          <div class="ph-input"><div>Nachricht eingeben…</div><i>↑</i></div>
+          <div class="ph-nav">
+            <div class="on"><i>💬</i>Analyse</div>
+            <div><i>📖</i>Wissen</div>
+            <div><i>🕘</i>Verlauf</div>
+            <div><i>⚙</i>Optionen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="features">
+      <h2>Das steckt in der App</h2>
+      <p class="sub">Eine Analyse-App für Jugendliche – einfach, lokal und ohne Kosten.</p>
+      <div class="cards">
+        <div class="card"><div class="ico">💰</div><h3>Kostenlos</h3><p>Keine versteckten Kosten, keine Abos, keine In-App-Käufe.</p></div>
+        <div class="card"><div class="ico">📱</div><h3>Für Android</h3><p>Als APK für Smartphones und Tablets.</p></div>
+        <div class="card"><div class="ico">🔒</div><h3>Datenschutz</h3><p>Dein Gemini API-Key und dein Verlauf bleiben lokal auf deinem Gerät.</p></div>
+        <div class="card"><div class="ico">🎯</div><h3>21 Kategorien</h3><p>Von Ritualen und Gemeinschaft bis zu Musik, Film, Gaming, Büchern und Architektur.</p></div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="panel">
+        <div>
+          <h2>App herunterladen</h2>
+          <p style="margin-bottom:28px">Nur als APK für Android verfügbar. Version 1.0.0</p>
+          <a class="btn fill" href="app-release.apk"><span class="dl">⬇</span> APK herunterladen</a>
+        </div>
+        <ol class="steps">
+          <li><b>1</b>APK auf dein Android-Gerät laden und öffnen.</li>
+          <li><b>2</b>Falls nötig: „Installation aus unbekannten Quellen“ erlauben.</li>
+          <li><b>3</b>In den Optionen deinen Gemini API-Key eintragen oder das kostenlose Modell testen.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="wissen">
+      <h2>Online-Wissensdatenbank</h2>
+      <p class="sub">Alle Kategorien mit Erklärungen und Beispielen – auch ohne App.</p>
+      <div class="k-grid">
+        <a class="k" href="wissen.html#rituale"><div class="ico">↻</div><h3>Rituale</h3><p>Wiederholte Handlungen schaffen Zugehörigkeit, Ordnung und Bedeutung.</p></a>
+        <a class="k" href="wissen.html#gemeinschaft"><div class="ico">👥</div><h3>Gemeinschaft</h3><p>Feste, Vereine und Fanszenen können gemeinschaftsstiftend wirken.</p></a>
+        <a class="k" href="wissen.html#symbole"><div class="ico">✦</div><h3>Symbole</h3><p>Gegenstände und Bilder können Werte oder Erinnerungen verdichten.</p></a>
+        <a class="k" href="wissen.html#transzendenz"><div class="ico">☁</div><h3>Transzendenz</h3><p>Grenzerfahrungen verweisen auf das, was Menschen als größer erleben.</p></a>
+        <a class="k" href="wissen.html#musik"><div class="ico">♪</div><h3>Musik</h3><p>Lieder, Konzerte und Festivals können starke Emotionen erzeugen.</p></a>
+        <a class="k" href="wissen.html#film"><div class="ico">🎬</div><h3>Film &amp; Kino</h3><p>Filme erzählen Geschichten, die Werte, Ängste und Träume spiegeln.</p></a>
+        <a class="k" href="wissen.html#web"><div class="ico">🌐</div><h3>Web &amp; Social Media</h3><p>Digitale Räume schaffen neue Formen von Gemeinschaft.</p></a>
+        <a class="k" href="wissen.html#sport"><div class="ico">⚽</div><h3>Sport &amp; Fanszenen</h3><p>Sportveranstaltungen wirken wie moderne Rituale.</p></a>
+      </div>
+      <div class="more"><a class="btn tonal" href="wissen.html">Alle Kategorien ansehen</a></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>Religion im Alltag · Made by Jojosstudio · Projekt für Religion</span>
+    <span>Nutzt die Google Gemini API – eigener API-Key erforderlich.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d=document,r=d.documentElement,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // Scroll-Fortschritt
+  var p=d.createElement('div');p.className='prog';d.body.appendChild(p);
+  function sc(){var h=r.scrollHeight-innerHeight;p.style.transform='scaleX('+(h>0?scrollY/h:0)+')'}
+  addEventListener('scroll',sc,{passive:true});sc();
+
+  // Einblenden beim Scrollen (gestaffelt)
+  var els=d.querySelectorAll('section h2,.sub,.card,.panel>div>*,.steps li,.k,.more');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}
+  })},{threshold:.15});
+  els.forEach(function(el){
+    var i=[].indexOf.call(el.parentNode.children,el);
+    el.style.setProperty('--d',(i%4)*90+'ms');
+    el.classList.add('rv');io.observe(el);
+  });
+
+  // Ripple-Effekt auf Buttons
+  d.querySelectorAll('.btn').forEach(function(b){
+    b.addEventListener('pointerdown',function(e){
+      var rc=b.getBoundingClientRect(),s=Math.max(rc.width,rc.height),x=d.createElement('span');
+      x.className='rip';
+      x.style.cssText='width:'+s+'px;height:'+s+'px;left:'+(e.clientX-rc.left-s/2)+'px;top:'+(e.clientY-rc.top-s/2)+'px';
+      b.appendChild(x);setTimeout(function(){x.remove()},650);
+    });
+  });
+
+  // Tipp-Animation im Handy-Mockup
+  var inp=d.querySelector('.ph-input div');
+  if(inp&&!reduce){
+    var words=['Like a Prayer','Back to the 90s','Festival'],w=0,c=0,del=false;
+    (function tick(){
+      var t=words[w],s;
+      c+=del?-1:1;
+      inp.style.color='var(--text)';
+      inp.textContent=t.slice(0,c);
+      s=del?35:85;
+      if(!del&&c===t.length){s=1500;del=true}
+      else if(del&&c===0){del=false;w=(w+1)%words.length;s=500}
+      setTimeout(tick,s);
+    })();
+  }
+})();
+</script>
+</body>
+</html>
