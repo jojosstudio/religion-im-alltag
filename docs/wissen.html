@@ -53,6 +53,42 @@ footer{background:var(--nav);padding:32px 0;color:var(--muted);font-size:.9rem;t
 @media(max-width:600px){.th{padding:20px}.d{padding:20px}.th i{width:48px;height:48px;font-size:22px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
+/* ===== Song-Karten ===== */
+.song-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:10px}
+.song-card{background:var(--surface);border-radius:24px;padding:20px;border:1.5px solid var(--outline);display:flex;gap:16px;align-items:center;cursor:pointer;transition:transform .3s,box-shadow .3s,border-color .2s}
+.song-card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(101,85,143,.16);border-color:var(--primary)}
+.song-badge{flex:none;font-size:.8rem;font-weight:800;padding:5px 14px;border-radius:999px;letter-spacing:.05em}
+.song-badge.profan{background:#FDECEA;color:#B71C1C}
+.song-badge.nichtprofan{background:#E1F0E1;color:#1B5E20}
+.song-info{flex:1}
+.song-title{font-weight:800;font-size:1.05rem;color:var(--text)}
+.song-artist{color:var(--muted);font-size:.9rem;margin-top:2px}
+.song-hint{color:var(--muted);font-size:.86rem;margin-top:6px;font-weight:600}
+.song-arrow{font-size:1.4rem;color:var(--muted);transition:transform .2s}
+.song-card:hover .song-arrow{transform:translateX(4px);color:var(--primary)}
+
+/* ===== Modal ===== */
+.modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal[hidden]{display:none}
+.scr{position:absolute;inset:0;background:rgba(29,25,43,.55);backdrop-filter:blur(6px);animation:fade .3s both}
+.sheet{position:relative;width:100%;max-width:520px;max-height:92vh;overflow:auto;background:var(--surface);border-radius:32px;padding:32px;box-shadow:0 30px 80px rgba(30,15,70,.45);animation:sheet .5s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes sheet{from{opacity:0;translate:0 40px;scale:.9}to{opacity:1;translate:0 0;scale:1}}
+.m-ico{width:56px;height:56px;border-radius:20px;display:grid;place-items:center;font-size:28px;margin-bottom:18px}
+.m-ico.profan{background:#FDECEA;color:#B71C1C}
+.m-ico.nichtprofan{background:#E1F0E1;color:#1B5E20}
+.sheet h3{font-size:1.6rem;font-weight:800;line-height:1.2;margin-bottom:6px}
+.sheet p.sub{color:var(--muted);font-size:.98rem;margin-bottom:20px}
+.sheet .status{font-weight:800;font-size:.9rem;padding:5px 14px;border-radius:999px;display:inline-block;margin-bottom:18px}
+.sheet .status.profan{background:#FDECEA;color:#B71C1C}
+.sheet .status.nichtprofan{background:#E1F0E1;color:#1B5E20}
+.sheet h4{font-size:1.1rem;font-weight:800;color:var(--text);margin:18px 0 8px}
+.sheet p{color:#47444F;font-size:.98rem;line-height:1.55}
+.sheet .actions{margin-top:26px;display:flex;gap:12px}
+.sheet .btn-cancel{background:none;border:0;font:inherit;font-weight:600;color:var(--primary);padding:12px 20px;border-radius:999px;cursor:pointer}
+.sheet .btn-cancel:hover{background:var(--tint)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+
 /* ===== Animationen ===== */
 @keyframes up{from{opacity:0;translate:0 26px}to{opacity:1;translate:0 0}}
 @keyframes down{from{opacity:0;translate:0 -16px}to{opacity:1;translate:0 0}}
@@ -191,13 +227,55 @@ body::before{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none
 
     <section id="musik" class="t">
       <div class="th"><i>🎵</i><div><h2>Musik</h2><p>Lieder, Konzerte und Festivals können starke Emotionen und Gemeinschaft erzeugen.</p></div></div>
-      <div class="d"><h3>Was Musik religiös machen kann</h3><p>Musik berührt Emotionen direkt und kann Gemeinschaft erzeugen. Kirchenmusik, Gospel oder Konzert-Erlebnisse können Gänsehautmomente schaffen, die spirituell wirken. Lieder drücken Freude, Trauer, Liebe oder Sehnsucht aus – Gefühle, die auch in religiösen Kontexten eine zentrale Rolle spielen.</p></div>
-      <h4>Beispiele aus dem Alltag</h4>
-      <ul>
-        <li>Ein Konzert kann ein gemeinschaftliches Erlebnis mit Gänsehautmomenten sein.</li>
-        <li>Lieder können Trost spenden und Gefühle ausdrücken, die Worte nicht fassen.</li>
-        <li>Festivals schaffen temporäre Gemeinschaften mit eigenen Regeln.</li>
-      </ul>
+      <div class="d"><h3>Profane Musik vs. religiöse Musik</h3><p>Nicht jede Musik mit religiösen Worten ist automatisch religiös – und nicht jede profane Musik ist wertlos. Ein Song kann religiöse Symbole nutzen, um weltliche Gefühle auszudrücken (profan), oder er kann eine echte spirituelle Sehnsucht transportieren (nicht profan). Die Entscheidung liegt im Kontext: Wird Gott angerufen oder nur ein Bild geborgt? Unten findest du fünf Song-Beispiele. Klicke auf einen Song, um zu sehen, wann er als profan gilt und warum er dennoch nicht profan sein kann.</p></div>
+      <h4>5 Song-Beispiele</h4>
+      <div class="song-grid">
+        <div class="song-card" onclick="openSongModal('likeaprayer')">
+          <span class="song-badge profan">profan</span>
+          <div class="song-info">
+            <div class="song-title">Like a Prayer</div>
+            <div class="song-artist">Madonna</div>
+            <div class="song-hint">Wann ist es profan?</div>
+          </div>
+          <span class="song-arrow">›</span>
+        </div>
+        <div class="song-card" onclick="openSongModal('hallelujah')">
+          <span class="song-badge profan">profan</span>
+          <div class="song-info">
+            <div class="song-title">Hallelujah</div>
+            <div class="song-artist">Leonard Cohen</div>
+            <div class="song-hint">Wann ist es profan?</div>
+          </div>
+          <span class="song-arrow">›</span>
+        </div>
+        <div class="song-card" onclick="openSongModal('takeme')">
+          <span class="song-badge profan">profan</span>
+          <div class="song-info">
+            <div class="song-title">Take Me to Church</div>
+            <div class="song-artist">Hozier</div>
+            <div class="song-hint">Wann ist es profan?</div>
+          </div>
+          <span class="song-arrow">›</span>
+        </div>
+        <div class="song-card" onclick="openSongModal('amazing')">
+          <span class="song-badge nichtprofan">nicht profan</span>
+          <div class="song-info">
+            <div class="song-title">Amazing Grace</div>
+            <div class="song-artist">Traditionell</div>
+            <div class="song-hint">Nicht profan – obwohl oft gedacht</div>
+          </div>
+          <span class="song-arrow">›</span>
+        </div>
+        <div class="song-card" onclick="openSongModal('kyrie')">
+          <span class="song-badge profan">profan</span>
+          <div class="song-info">
+            <div class="song-title">Kyrie</div>
+            <div class="song-artist">Mr. Mister</div>
+            <div class="song-hint">Wann ist es profan?</div>
+          </div>
+          <span class="song-arrow">›</span>
+        </div>
+      </div>
     </section>
 
     <section id="film" class="t">
@@ -362,6 +440,24 @@ body::before{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none
   <div class="wrap">Religion im Alltag · Made by Jojosstudio<br>Diese App verwendet die Google Gemini API. Ein eigener API-Key ist erforderlich.</div>
 </footer>
 
+<!-- Song-Detail Modal -->
+<div class="modal" id="songModal" hidden>
+  <div class="scr" onclick="closeSongModal()"></div>
+  <div class="sheet" onclick="event.stopPropagation()">
+    <div class="m-ico" id="songModalIcon">🎵</div>
+    <h3 id="songModalTitle">Song</h3>
+    <p class="sub" id="songModalSub">Untertitel</p>
+    <span class="status" id="songModalStatus">profan</span>
+    <h4>Wann ist es profan?</h4>
+    <p id="songModalProfane">–</p>
+    <h4>Nicht profan – obwohl oft gedacht</h4>
+    <p id="songModalNotProfane">–</p>
+    <div class="actions">
+      <button class="btn-cancel" onclick="closeSongModal()">Schließen</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var d=document,r=d.documentElement,reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -398,6 +494,78 @@ body::before{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none
     nav.scrollTo({left:a.offsetLeft-nav.clientWidth/2+a.offsetWidth/2,behavior:reduce?'auto':'smooth'});
   })},{rootMargin:'-30% 0px -60% 0px'});
   d.querySelectorAll('.t').forEach(function(s){spy.observe(s)});
+
+  // ===== Song-Modal =====
+  var songs = {
+    likeaprayer: {
+      title: 'Like a Prayer – Madonna',
+      sub: 'Madonna · 1989',
+      profane: true,
+      profaneText: 'Der Song nutzt religiöse Symbole wie Kreuze und Stigmata im Pop-Kontext, ohne eigentlichen Gottesbezug. Das kann als profane Umdeutung religiöser Bilder gelesen werden.',
+      notProfaneText: 'Die religiösen Bilder drücken persönliche Sehnsucht und spirituelle Erfahrung aus – es ist keine Gotteslästerung. Viele hören darin ein echtes Gebet.'
+    },
+    hallelujah: {
+      title: 'Hallelujah – Leonard Cohen',
+      sub: 'Leonard Cohen · 1984',
+      profane: true,
+      profaneText: 'Obwohl „Hallelujah“ ein Lobgesang auf Gott ist, singt Cohen hier von Liebe, Sex und Trennung. In diesem weltlichen Kontext wirkt der Begriff profan.',
+      notProfaneText: 'Das Wort „Hallelujah“ selbst ist religiös. Der Song kann auch als spirituelle Suche nach Trost gelesen werden – nicht automatisch profan.'
+    },
+    takeme: {
+      title: 'Take Me to Church – Hozier',
+      sub: 'Hozier · 2013',
+      profane: true,
+      profaneText: 'Die Kirche wird hier als Metapher für eine körperliche Beziehung genutzt. Religiöse Sprache wird weltlich und profan umgedeutet.',
+      notProfaneText: 'Der Song kritisiert kirchliche Dogmen und plädiert für bedingungslose Liebe. Das ist eine ernsthafte, nicht profane Auseinandersetzung mit Religion.'
+    },
+    amazing: {
+      title: 'Amazing Grace – Traditionell',
+      sub: 'Traditionelles Kirchenlied',
+      profane: false,
+      profaneText: '– (keine; der Text handelt klar von Gnade und Erlösung und ist religiös geprägt).',
+      notProfaneText: 'Obwohl es ein Kirchenlied ist, denken manche, es sei „nur altmodisch“ oder profan. Tatsächlich ist es ein religiöses Gotteslied.'
+    },
+    kyrie: {
+      title: 'Kyrie – Mr. Mister',
+      sub: 'Mr. Mister · 1985',
+      profane: true,
+      profaneText: 'Der Song nutzt den religiösen Ruf „Kyrie eleison“ (Herr, erbarme dich) im Kontext einer Liebesbeziehung. Religiöse Sprache wird profan umgedeutet.',
+      notProfaneText: 'Der Refrain kann als echter Hilferuf und spirituelle Sehnsucht gelesen werden – nicht automatisch profan.'
+    }
+  };
+
+  var songModal = document.getElementById('songModal');
+  function openSongModal(key) {
+    var s = songs[key];
+    if (!s) return;
+    document.getElementById('songModalTitle').textContent = s.title;
+    document.getElementById('songModalSub').textContent = s.sub;
+    var ico = document.getElementById('songModalIcon');
+    var status = document.getElementById('songModalStatus');
+    if (s.profane) {
+      ico.className = 'm-ico profan';
+      ico.textContent = '⚠';
+      status.className = 'status profan';
+      status.textContent = 'Status: profan';
+    } else {
+      ico.className = 'm-ico nichtprofan';
+      ico.textContent = '✓';
+      status.className = 'status nichtprofan';
+      status.textContent = 'Status: nicht profan';
+    }
+    document.getElementById('songModalProfane').textContent = s.profaneText;
+    document.getElementById('songModalNotProfane').textContent = s.notProfaneText;
+    songModal.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+  }
+  function closeSongModal() {
+    songModal.hidden = true;
+    document.documentElement.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !songModal.hidden) closeSongModal();
+  });
+
 })();
 </script>
 </body>
