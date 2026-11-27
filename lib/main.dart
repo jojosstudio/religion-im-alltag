@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -893,7 +893,159 @@ const List<_MusicSong> musicSongs = [
         'Die religiösen Bilder drücken persönliche Sehnsucht und spirituelle Erfahrung aus – es ist keine Gotteslästerung. Viele hören darin ein echtes Gebet.',
   ),
   _MusicSong(
-    title: 'Hallelujah',
+    title: 'Imagine',
+    artist: 'John Lennon',
+    profane: true,
+    profaneText:
+        'Der Sänger lädt ein, sich eine Welt ohne Himmel, Hölle und Religion vorzustellen, in der Menschen in Frieden leben.',
+    notProfaneText:
+        '1971 als humanistische Vision gedacht, wird er heute dennoch bei Gedenkfeiern und manchmal in Kirchen gespielt. Der Inhalt ist religionskritisch, die Wirkung oft fast "heilig".',
+  ),
+  _MusicSong(
+    title: 'Stairway to Heaven',
+    artist: 'Led Zeppelin',
+    profane: true,
+    profaneText:
+        'Der Text benutzt religiöse Bilder (Treppe zum Himmel) im Rock-Kontext.',
+    notProfaneText:
+        'Die mystische Stimmung kann als spirituelle Erfahrung gelesen werden.',
+  ),
+  _MusicSong(
+    title: 'Losing My Religion',
+    artist: 'R.E.M.',
+    profane: true,
+    profaneText:
+        'Der Titel spielt mit religiösen Wörtern, handelt aber von Zweifel und Sehnsucht.',
+    notProfaneText:
+        'Der Ausdruck "Losing my religion" kann als existenzieller Ausruf gelesen werden.',
+  ),
+  _MusicSong(
+    title: 'Jesus Walks',
+    artist: 'Kanye West',
+    profane: false,
+    profaneText:
+        '– (keine; der Song thematisiert explizit Glauben und Jesus).',
+    notProfaneText:
+        'Ein Gospel-ähnlicher Hip-Hop-Song mit religiösem Inhalt.',
+  ),
+  _MusicSong(
+    title: 'Spirit in the Sky',
+    artist: 'Norman Greenbaum',
+    profane: true,
+    profaneText:
+        'Der Song benutzt christliche Begriffe als eingängigen Pop-Refrain.',
+    notProfaneText:
+        'Norman Greenbaum ist Jude und wollte einen Gospel-Song im Stil von TV-Country-Gospel schreiben. Er nutzt christliche Begriffe stilistisch, mit Fuzz-Gitarre, nicht als persönliches Bekenntnis.',
+  ),
+  _MusicSong(
+    title: 'Sweet Child O\' Mine',
+    artist: 'Guns N\' Roses',
+    profane: true,
+    profaneText:
+        'Ein Liebeslied ohne religiösen Inhalt.',
+    notProfaneText:
+        'Die emotionale Tiefe kann als spirituelle Erfahrung gelesen werden.',
+  ),
+  _MusicSong(
+    title: 'Bohemian Rhapsody',
+    artist: 'Queen',
+    profane: true,
+    profaneText:
+        'Der Text mischt religiöse und okkulte Bilder ohne festen Glauben.',
+    notProfaneText:
+        'Die theatrale Inszenierung kann als spirituelle Kunst gelesen werden.',
+  ),
+  _MusicSong(
+    title: 'Halo',
+    artist: 'Beyoncé',
+    profane: true,
+    profaneText:
+        'Das Wort "Halo" wird als Liebesmetapher genutzt, nicht als religiöses Symbol.',
+    notProfaneText:
+        'Die Verehrung einer Person kann als spirituelle Erfahrung gelesen werden.',
+  ),
+  _MusicSong(
+    title: 'Angel',
+    artist: 'Sarah McLachlan',
+    profane: true,
+    profaneText:
+        'Das Wort "Engel" wird metaphorisch für Trost und Sehnsucht genutzt.',
+    notProfaneText:
+        'McLachlan schrieb es unter dem Eindruck vom Tod eines befreundeten Musikers (1996). Später wurde es durch Tierschutz-Werbung weltbekannt. Der Engel ist ein Trostbild, kein Glaubensinhalt.',
+  ),
+  _MusicSong(
+    title: 'Oh Happy Day',
+    artist: 'Edwin Hawkins Singers',
+    profane: false,
+    profaneText:
+        '– (keine; es ist ein Gospelsong mit religiösem Inhalt).',
+    notProfaneText:
+        'Die Edwin Hawkins Singers machten 1968/69 aus einem alten Kirchenlied einen weltweiten Pop-Hit. Trotz Pop-Erfolg bleibt der Inhalt ein klares Bekenntnis.',
+  ),
+  _MusicSong(
+    title: 'Shallow',
+    artist: 'Lady Gaga',
+    profane: true,
+    profaneText:
+        'Ein Liebesduett ohne religiösen Inhalt.',
+    notProfaneText:
+        'Die intensive Emotion kann als spirituelle Erfahrung gelesen werden.',
+  ),
+  _MusicSong(
+    title: 'Blessed',
+    artist: 'Elton John',
+    profane: true,
+    profaneText:
+        'Das Wort "gesegnet" wird als Liebesbekundung genutzt.',
+    notProfaneText:
+        'Der Wunsch nach Segen hat religiöse Wurzeln.',
+  ),
+  _MusicSong(
+    title: 'Judas',
+    artist: 'Lady Gaga',
+    profane: true,
+    profaneText:
+        'Der Song nutzt die Judas-Figur als Metapher für eine toxische Beziehung.',
+    notProfaneText:
+        'Im Video (2011) spielt Gaga Maria Magdalena, Judas fährt Motorrad. Kirchliche Gruppen protestierten. Biblische Figuren dienen als Pop-Bühne.',
+  ),
+  _MusicSong(
+    title: 'Holy',
+    artist: 'Justin Bieber',
+    profane: false,
+    profaneText:
+        '– (keine; der Song thematisiert Glauben und Heilige).',
+    notProfaneText:
+        'Ein moderner Popsong mit religiösem Inhalt.',
+  ),
+  _MusicSong(
+    title: 'Ave Maria',
+    artist: 'Schubert',
+    profane: false,
+    profaneText:
+        '– (keine; klassisches Gebet an Maria).',
+    notProfaneText:
+        'Eines der bekanntesten religiösen Musikstücke.',
+  ),
+  _MusicSong(
+    title: 'Stand by Me',
+    artist: 'Ben E. King',
+    profane: true,
+    profaneText:
+        'Ein Liebeslied ohne religiösen Inhalt.',
+    notProfaneText:
+        'Der Text erinnert an biblische Zusammengehörigkeit.',
+  ),
+  _MusicSong(
+    title: 'I Can Only Imagine',
+    artist: 'MercyMe',
+    profane: false,
+    profaneText:
+        '– (keine; christlicher Popsong über den Himmel).',
+    notProfaneText:
+        'Explizit religiöser Text über die Begegnung mit Gott.',
+  ),
+];
     artist: 'Leonard Cohen',
     profane: true,
     profaneText:
@@ -901,7 +1053,7 @@ const List<_MusicSong> musicSongs = [
     notProfaneText:
         'Das Wort „Hallelujah“ selbst ist religiös. Der Song kann auch als spirituelle Suche nach Trost gelesen werden – nicht automatisch profan.',
   ),
-  _MusicSong(
+  void _MusicSong(
     title: 'Take Me to Church',
     artist: 'Hozier',
     profane: true,
@@ -910,7 +1062,7 @@ const List<_MusicSong> musicSongs = [
     notProfaneText:
         'Der Song kritisiert kirchliche Dogmen und plädiert für bedingungslose Liebe. Das ist eine ernsthafte, nicht profane Auseinandersetzung mit Religion.',
   ),
-  _MusicSong(
+  void _MusicSong(
     title: 'Amazing Grace',
     artist: 'Traditionell',
     profane: false,
@@ -919,7 +1071,7 @@ const List<_MusicSong> musicSongs = [
     notProfaneText:
         'Obwohl es ein Kirchenlied ist, denken manche, es sei „nur altmodisch“ oder profan. Tatsächlich ist es ein religiöses Gotteslied.',
   ),
-  _MusicSong(
+  void _MusicSong(
     title: 'Kyrie',
     artist: 'Mr. Mister',
     profane: true,
@@ -945,7 +1097,7 @@ class _MusicSongCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: accent.withOpacity(0.3), width: 1.5),
+        border: Border.all(color: accent.withValues(alpha: 0.3), width: 1.5),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
@@ -957,7 +1109,7 @@ class _MusicSongCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                 decoration: BoxDecoration(
-                  color: accent.withOpacity(0.1),
+                  color: accent.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -1021,7 +1173,7 @@ void _showSongDialog(BuildContext context, _MusicSong song) {
               padding:
                   const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: accent.withOpacity(0.1),
+                color: accent.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
@@ -1077,6 +1229,14 @@ class _KnowledgeDetailPage extends StatelessWidget {
   final _KnowledgeTopic topic;
   const _KnowledgeDetailPage({required this.topic});
 
+  static List<Widget> _buildMusicSongs(BuildContext context) {
+    final songs = musicSongs;
+    return songs.map((song) => _MusicSongCard(
+      song: song,
+      onTap: () => _showSongDialog(context, song),
+    )).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final examples = switch (topic.title) {
@@ -1110,8 +1270,7 @@ class _KnowledgeDetailPage extends StatelessWidget {
           'Eine Alltagsanalyse sollte keine Absichten oder Glaubensinhalte erfinden.',
           'Profan kann wertvoll sein, auch ohne religiöse Bedeutung.',
         ],
-      'Musik' => const [
-          'Like a Prayer – Madonna',
+      'Musik' => _buildMusicSongs(context),
           'Hallelujah – Leonard Cohen',
           'Take Me to Church – Hozier',
           'Amazing Grace – Traditionell',
@@ -1382,10 +1541,10 @@ class _KnowledgeDetailPage extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: topic.background.withOpacity(0.3),
+                color: topic.background.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
-                  color: topic.foreground.withOpacity(0.4),
+                  color: topic.foreground.withValues(alpha: 0.4),
                   width: 1.5,
                 ),
               ),
@@ -1397,7 +1556,7 @@ class _KnowledgeDetailPage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: topic.foreground.withOpacity(0.15),
+                          color: topic.foreground.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
@@ -1475,10 +1634,10 @@ class _KnowledgeDetailPage extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: topic.background.withOpacity(0.3),
+              color: topic.background.withValues(alpha: 0.3),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: topic.foreground.withOpacity(0.4),
+                color: topic.foreground.withValues(alpha: 0.4),
                 width: 1.5,
               ),
             ),
@@ -1490,7 +1649,7 @@ class _KnowledgeDetailPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: topic.foreground.withOpacity(0.15),
+                        color: topic.foreground.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
@@ -1533,7 +1692,7 @@ class _KnowledgeDetailPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -1579,7 +1738,7 @@ class _KnowledgeDetailPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(14),
                       border: Border(
                         left: BorderSide(
-                          color: topic.foreground.withOpacity(0.3),
+                          color: topic.foreground.withValues(alpha: 0.3),
                           width: 3,
                         ),
                       ),
@@ -1592,7 +1751,7 @@ class _KnowledgeDetailPage extends StatelessWidget {
                           child: Icon(
                             Icons.question_mark_rounded,
                             size: 18,
-                            color: topic.foreground.withOpacity(0.7),
+                            color: topic.foreground.withValues(alpha: 0.7),
                           ),
                         ),
                         const SizedBox(width: 10),
