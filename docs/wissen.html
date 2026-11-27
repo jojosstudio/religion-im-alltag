@@ -495,7 +495,20 @@ body::before{content:"";position:fixed;inset:-25%;z-index:-1;pointer-events:none
   var songModal = document.getElementById('songModal');
   function openSongModal(key) {
     var s = songs[key];
-    if (!s) return;
+    if (!s) {
+      // Fallback: Zeige Basic-Info aus der geklickten Karte
+      var card = document.querySelector('.song-card[onclick*=\"openSongModal('\'' + key + '\''')\"]');
+      var title = card ? card.querySelector('.song-title').textContent : 'Song';
+      var artist = card ? card.querySelector('.song-artist').textContent : '';
+      document.getElementById('songModalTitle').textContent = title + ' – ' + artist;
+      document.getElementById('songModalSub').textContent = '';
+      document.getElementById('songModalStatus').textContent = 'Status: unbekannt';
+      document.getElementById('songModalProfane').textContent = '';
+      document.getElementById('songModalNotProfane').textContent = '';
+      songModal.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      return;
+    }
     document.getElementById('songModalTitle').textContent = s.title;
     document.getElementById('songModalSub').textContent = s.sub;
     var ico = document.getElementById('songModalIcon');
