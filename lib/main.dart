@@ -865,6 +865,214 @@ class _TopicDetail {
   const _TopicDetail({required this.title, required this.text, required this.icon});
 }
 
+/// Ein Song-Beispiel für das Thema Musik mit Angabe, ob es als profan gilt
+/// und welcher Eindruck entsteht (auch wenn es nicht profan ist).
+class _MusicSong {
+  final String title;
+  final String artist;
+  final bool profane;
+  final String profaneText;        // Antwort auf: Wann ist es profan?
+  final String notProfaneText;     // Nicht profan – obwohl oft gedacht
+  const _MusicSong({
+    required this.title,
+    required this.artist,
+    required this.profane,
+    required this.profaneText,
+    required this.notProfaneText,
+  });
+}
+
+const List<_MusicSong> musicSongs = [
+  _MusicSong(
+    title: 'Like a Prayer',
+    artist: 'Madonna',
+    profane: true,
+    profaneText:
+        'Der Song nutzt religiöse Symbole wie Kreuze und Stigmata im Pop-Kontext, ohne eigentlichen Gottesbezug. Das kann als profane Umdeutung religiöser Bilder gelesen werden.',
+    notProfaneText:
+        'Die religiösen Bilder drücken persönliche Sehnsucht und spirituelle Erfahrung aus – es ist keine Gotteslästerung. Viele hören darin ein echtes Gebet.',
+  ),
+  _MusicSong(
+    title: 'Hallelujah',
+    artist: 'Leonard Cohen',
+    profane: true,
+    profaneText:
+        'Obwohl „Hallelujah“ ein Lobgesang auf Gott ist, singt Cohen hier von Liebe, Sex und Trennung. In diesem weltlichen Kontext wirkt der Begriff profan.',
+    notProfaneText:
+        'Das Wort „Hallelujah“ selbst ist religiös. Der Song kann auch als spirituelle Suche nach Trost gelesen werden – nicht automatisch profan.',
+  ),
+  _MusicSong(
+    title: 'Take Me to Church',
+    artist: 'Hozier',
+    profane: true,
+    profaneText:
+        'Die Kirche wird hier als Metapher für eine körperliche Beziehung genutzt. Religiöse Sprache wird weltlich und profan umgedeutet.',
+    notProfaneText:
+        'Der Song kritisiert kirchliche Dogmen und plädiert für bedingungslose Liebe. Das ist eine ernsthafte, nicht profane Auseinandersetzung mit Religion.',
+  ),
+  _MusicSong(
+    title: 'Amazing Grace',
+    artist: 'Traditionell',
+    profane: false,
+    profaneText:
+        '– (keine; der Text handelt klar von Gnade und Erlösung und ist religiös geprägt).',
+    notProfaneText:
+        'Obwohl es ein Kirchenlied ist, denken manche, es sei „nur altmodisch“ oder profan. Tatsächlich ist es ein religiöses Gotteslied.',
+  ),
+  _MusicSong(
+    title: 'Kyrie',
+    artist: 'Mr. Mister',
+    profane: true,
+    profaneText:
+        'Der Song nutzt den religiösen Ruf „Kyrie eleison“ (Herr, erbarme dich) im Kontext einer Liebesbeziehung. Religiöse Sprache wird profan umgedeutet.',
+    notProfaneText:
+        'Der Refrain kann als echter Hilferuf und spirituelle Sehnsucht gelesen werden – nicht automatisch profan.',
+  ),
+];
+
+/// Zeigt ein einzelnes Song-Beispiel als antippbare Karte an.
+class _MusicSongCard extends StatelessWidget {
+  final _MusicSong song;
+  final VoidCallback onTap;
+  const _MusicSongCard({required this.song, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final accent =
+        song.profane ? const Color(0xFFB71C1C) : const Color(0xFF1B5E20);
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: accent.withOpacity(0.3), width: 1.5),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                decoration: BoxDecoration(
+                  color: accent.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  song.profane ? 'profan' : 'nicht profan',
+                  style: TextStyle(
+                    color: accent,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${song.title} – ${song.artist}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                          color: Color(0xFF3E3948)),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      song.profane
+                          ? 'Wann ist es profan?'
+                          : 'Nicht profan – obwohl oft gedacht',
+                      style: TextStyle(
+                          color: Color(0xFF777381),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right_rounded,
+                  color: Color(0xFFA9A4B2)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Öffnet einen Dialog mit den Details zu profan / nicht profan für einen Song.
+void _showSongDialog(BuildContext context, _MusicSong song) {
+  final accent =
+      song.profane ? const Color(0xFFB71C1C) : const Color(0xFF1B5E20);
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Text('${song.title} – ${song.artist}'),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: accent.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                song.profane ? 'Status: profan' : 'Status: nicht profan',
+                style: TextStyle(
+                  color: accent,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+            const Text(
+              'Wann ist es profan?',
+              style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 15,
+                  color: Color(0xFF3E3948)),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              song.profaneText,
+              style: const TextStyle(
+                  height: 1.4, color: Color(0xFF4D4857), fontSize: 14),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Nicht profan – obwohl oft gedacht',
+              style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 15,
+                  color: Color(0xFF3E3948)),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              song.notProfaneText,
+              style: const TextStyle(
+                  height: 1.4, color: Color(0xFF4D4857), fontSize: 14),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Schließen'),
+        ),
+      ],
+    ),
+  );
+}
+
 class _KnowledgeDetailPage extends StatelessWidget {
   final _KnowledgeTopic topic;
   const _KnowledgeDetailPage({required this.topic});
@@ -903,9 +1111,11 @@ class _KnowledgeDetailPage extends StatelessWidget {
           'Profan kann wertvoll sein, auch ohne religiöse Bedeutung.',
         ],
       'Musik' => const [
-          'Ein Konzert kann ein gemeinschaftliches Erlebnis mit Gänsehautmomenten sein.',
-          'Lieder können Trost spenden und Gefühle ausdrücken, die Worte nicht fassen.',
-          'Festivals schaffen temporäre Gemeinschaften mit eigenen Regeln.',
+          'Like a Prayer – Madonna',
+          'Hallelujah – Leonard Cohen',
+          'Take Me to Church – Hozier',
+          'Amazing Grace – Traditionell',
+          'Kyrie – Mr. Mister',
         ],
       'Film & Kino' => const [
           'Filme erzählen Geschichten, die Werte, Ängste und Träume spiegeln.',
@@ -1021,8 +1231,9 @@ class _KnowledgeDetailPage extends StatelessWidget {
         icon: Icons.light_mode_outlined,
       ),
       'Musik' => const _TopicDetail(
-        title: 'Was Musik religiös machen kann',
-        text: 'Musik berührt Emotionen direkt und kann Gemeinschaft erzeugen. Kirchenmusik, Gospel oder Konzert-Erlebnisse können Gänsehautmomente schaffen, die spirituell wirken. Lieder drücken Freude, Trauer, Liebe oder Sehnsucht aus – Gefühle, die auch in religiösen Kontexten eine zentrale Rolle spielen.',
+        title: 'Profane Musik vs. religiöse Musik',
+        text:
+            'Nicht jede Musik mit religiösen Worten ist automatisch religiös – und nicht jede profane Musik ist wertlos. Ein Song kann religiöse Symbole nutzen, um weltliche Gefühle auszudrücken (profan), oder er kann eine echte spirituelle Sehnsucht transportieren (nicht profan). Die Entscheidung liegt im Kontext: Wird Gott angerufen oder nur ein Bild geborgt? Unten finden Sie fünf Song-Beispiele. Tippen Sie auf einen Song, um zu sehen, wann er als profan gilt und warum er dennoch nicht profan sein kann.',
         icon: Icons.music_note_rounded,
       ),
       'Film & Kino' => const _TopicDetail(
@@ -1140,33 +1351,101 @@ class _KnowledgeDetailPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 22),
-          const Text('Beispiele',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
-          const SizedBox(height: 10),
-          ...examples.map(
-            (example) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(14),
+          if (topic.title == 'Musik') ...[
+            // Detaillierte Beschreibung oben
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
+                color: topic.background.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: topic.foreground.withOpacity(0.4),
+                  width: 1.5,
+                ),
               ),
-              child: Row(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.check_circle_outline_rounded,
-                      color: topic.foreground, size: 20),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Text(example,
-                        style: const TextStyle(
-                            height: 1.35, color: Color(0xFF4D4857))),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: topic.foreground.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          religiousInfo.icon,
+                          color: topic.foreground,
+                          size: 24,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          religiousInfo.title,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                            color: topic.foreground,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    religiousInfo.text,
+                    style: TextStyle(
+                      height: 1.5,
+                      color: Color(0xFF4D4857),
+                      fontSize: 15,
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
+            const SizedBox(height: 22),
+            const Text('5 Song-Beispiele',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            const SizedBox(height: 10),
+            ...musicSongs.map(
+              (song) => _MusicSongCard(
+                song: song,
+                onTap: () => _showSongDialog(context, song),
+              ),
+            ),
+          ] else ...[
+            const Text('Beispiele',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800)),
+            const SizedBox(height: 10),
+            ...examples.map(
+              (example) => Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(Icons.check_circle_outline_rounded,
+                        color: topic.foreground, size: 20),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(example,
+                          style: const TextStyle(
+                              height: 1.35, color: Color(0xFF4D4857))),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 24),
+          if (topic.title != 'Musik')
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(20),
